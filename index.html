@@ -55,6 +55,19 @@
                 <div class="search-results" id="search-results"></div>
             </div>
             
+            <div class="greeting" id="greeting-section">
+    <h1 id="greeting-message">Welcome!</h1>
+    <div class="greeting-buttons">
+        <button class="play-all-btn" onclick="playAll()"> 
+            <i class="fas fa-play"></i> Play All 
+        </button>
+    </div>
+</div>
+
+<h2>Recently Played</h2>
+<div class="song-grid" id="recently-played"></div>
+
+
             <!-- Home Section -->
             <div class="section" id="home-section">
                 <h2>Trending Now</h2>
@@ -71,6 +84,7 @@
                 <h2>BHAJAN</h2>
                 <div class="song-grid" id="bhajan-songs"></div>
             </div>
+            
 
             <!-- Favorites Section (hidden by default) -->
             <div class="section" id="favorites-section" style="display: none;">
@@ -148,6 +162,7 @@
        
         <audio id="audio-player"></audio>
     </div>
+    
     <!-- New Fullscreen Song View Modal (add to index.html before </body>) -->
 <!-- Enhanced Fullscreen Player with Animations and Favorite Function -->
 <div class="fullscreen-player" id="fullscreen-player">
@@ -188,6 +203,10 @@
     <div class="song-grid" id="fullscreen-suggestions"></div>
   </div>
 </div>
+<div class="discover-carousel" id="discover-carousel">
+    <!-- JS will add cards dynamically -->
+</div>
+<canvas id="particles"></canvas>
 
 
     <script src="script.js"></script>
