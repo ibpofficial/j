@@ -20,6 +20,15 @@ const songs = [
         duration: "4:31"
     },
     {
+        id: 6,
+        title: "QAYAMAT",
+        artist: "Neeraj Shridhar & Shruti Dhasmana",
+        genre: "pop",
+        cover: "housefull5.png",
+        audio: "housefull5.mp3",
+        duration: "2:52"
+    },
+    {
         id: 3,
         title: "shiv aarti  ",
         artist: "Shiv ",
@@ -56,7 +65,7 @@ const songs = [
         duration: "3:30"
     },
     {
-        id: 6,
+        id: 19,
         title: "comming soon",
         artist: "Neeraj Shridhar, Sunidhi Chauhan,",
         genre: "pop",
@@ -225,6 +234,8 @@ function init() {
     renderSongsByGenre('rock', songs.filter(song => song.genre === 'rock'));
     renderSongsByGenre('hiphop', songs.filter(song => song.genre === 'hiphop'));
      renderSongsByGenre('bhajan', songs.filter(song => song.genre === 'bhajan'));
+     renderRecentlyPlayed();
+
     renderFavorites();
     renderPlaylists();
     
@@ -467,13 +478,16 @@ function loadSong(song) {
         updateFullscreenPlayButton(); // Add this line
     }
 }
-// Play song
 function playSong() {
     isPlaying = true;
     audioPlayer.play();
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    updateFullscreenPlayButton(); // Update this line
+    updateFullscreenPlayButton();
+
+    // ✅ ADD THIS LINE:
+    saveRecentlyPlayed(songs[currentSongIndex].id);
 }
+
 
 // Pause song
 function pauseSong() {
@@ -1384,7 +1398,122 @@ window.addEventListener('load', () => {
 });
 
 
+function setGreeting() {
+    const greetingEl = document.getElementById("greeting-message");
+    const hour = new Date().getHours();
+    let greeting = "Welcome";
+
+    if (hour < 12) greeting = "Good Morning ☀️";
+    else if (hour < 18) greeting = "Good Afternoon 🌤️";
+    else greeting = "Good Evening 🌙";
+
+    greetingEl.textContent = `${greeting}, enjoy your music!`;
+}
+
+function playAll() {
+    if (songs.length > 0) {
+        currentSongIndex = 0;
+        loadSong(songs[0]);
+        playSong();
+    }
+}
+
+// Call it in init()
+init = (function (originalInit) {
+    return function () {
+        originalInit();
+        setGreeting();
+    };
+})(init);
+
+function renderDiscoveryCarousel() {
+    const carousel = document.getElementById('discover-carousel');
+    songs.slice(0, 10).forEach(song => {
+        const card = createSongCard(song);
+        carousel.appendChild(card);
+    });
+}
+window.addEventListener('load', renderDiscoveryCarousel);
+
+
+
+
+
+const particleCanvas = document.getElementById('particles');
+const particleCtx = particleCanvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function createParticles(count) {
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: Math.random() * particleCanvas.width,
+            y: Math.random() * particleCanvas.height,
+            radius: Math.random() * 3,
+            dx: (Math.random() - 0.5) * 1.2,
+            dy: (Math.random() - 0.5) * 1.2,
+        });
+    }
+}
+
+function animateParticles() {
+    particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+    particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > particleCanvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > particleCanvas.height) p.dy *= -1;
+
+        particleCtx.beginPath();
+        particleCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        particleCtx.fillStyle = '#1db954';
+        particleCtx.fill();
+    });
+    requestAnimationFrame(animateParticles);
+}
+
+createParticles(60);
+animateParticles();
+
+
+
+
+
+
+// Save played song to localStorage
+function saveRecentlyPlayed(songId) {
+    let history = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
+    history = [songId, ...history.filter(id => id !== songId)].slice(0, 5); // 🔥 Changed from 10 to 5
+    localStorage.setItem('recentlyPlayed', JSON.stringify(history));
+    renderRecentlyPlayed();
+}
+
+function renderRecentlyPlayed() {
+    const container = document.getElementById('recently-played');
+    if (!container) return;
+
+    const history = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
+    container.innerHTML = '';
+
+    history.forEach(id => {
+        const song = songs.find(s => s.id === id);
+        if (song) {
+            const card = createSongCard(song);
+            container.appendChild(card);
+        }
+    });
+}
+
+
 
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', init);
+
