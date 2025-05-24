@@ -1445,3 +1445,104 @@ body {
         height: 55px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Greeting Section */
+.greeting {
+    margin: 20px 0;
+    text-align: center;
+}
+#greeting-message {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #1ed760, #fff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Scroll To Top */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    z-index: 9999;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+#scrollToTopBtn:hover {
+    background-color: var(--primary-light);
+}
+
+
+
+.discover-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 20px 10px;
+    margin: 30px 0;
+}
+.discover-carousel::-webkit-scrollbar {
+    display: none;
+}
+.discover-carousel .song-card {
+    min-width: 250px;
+    scroll-snap-align: center;
+    transition: transform 0.3s;
+}
+.discover-carousel .song-card:hover {
+    transform: scale(1.05);
+}
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+
+
+
+
+
+
