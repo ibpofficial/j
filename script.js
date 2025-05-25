@@ -235,6 +235,7 @@ function init() {
     renderSongsByGenre('hiphop', songs.filter(song => song.genre === 'hiphop'));
      renderSongsByGenre('bhajan', songs.filter(song => song.genre === 'bhajan'));
      renderRecentlyPlayed();
+     setupRecentlyPlayedToggle();
 
     renderFavorites();
     renderPlaylists();
@@ -1499,6 +1500,16 @@ function renderRecentlyPlayed() {
     const container = document.getElementById('recently-played');
     if (!container) return;
 
+    // Check if hidden before rendering
+    const isHidden = localStorage.getItem('recentlyPlayedHidden') === 'true';
+    if (isHidden) {
+        container.style.display = 'none';
+        document.getElementById('toggle-recently-played').textContent = 'Show History';
+    } else {
+        container.style.display = 'grid';
+        document.getElementById('toggle-recently-played').textContent = 'Hide History';
+    }
+
     const history = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
     container.innerHTML = '';
 
@@ -1511,9 +1522,37 @@ function renderRecentlyPlayed() {
     });
 }
 
-
-
-
+// Add this new function
+function setupRecentlyPlayedToggle() {
+    const toggleBtn = document.getElementById('toggle-recently-played');
+    const recentlyPlayedSection = document.getElementById('recently-played');
+    
+    // Check localStorage for hidden state
+    const isHidden = localStorage.getItem('recentlyPlayedHidden') === 'true';
+    
+    if (isHidden) {
+        recentlyPlayedSection.style.display = 'none';
+        toggleBtn.textContent = 'Show History';
+    } else {
+        recentlyPlayedSection.style.display = 'grid'; // or whatever display value you use
+        toggleBtn.textContent = 'Hide History';
+    }
+    
+    toggleBtn.addEventListener('click', () => {
+        const currentlyHidden = recentlyPlayedSection.style.display === 'none';
+        
+        if (currentlyHidden) {
+            recentlyPlayedSection.style.display = 'grid';
+            toggleBtn.textContent = 'Hide History';
+            localStorage.setItem('recentlyPlayedHidden', 'false');
+        } else {
+            recentlyPlayedSection.style.display = 'none';
+            toggleBtn.textContent = 'Show History';
+            localStorage.setItem('recentlyPlayedHidden', 'true');
+        }
+    });
+}
 // Initialize the app
 document.addEventListener('DOMContentLoaded', init);
+
 
