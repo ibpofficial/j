@@ -30,11 +30,11 @@ const songs = [
     },
     {
         id: 3,
-        title: "shiv aarti  ",
-        artist: "Shiv ",
+        title: "Mera Ganraj Bihari ",
+        artist: "SHIV",
         genre: "bhajan",
-        cover: "shivaarti.png",
-        audio: "shiv aarti.mp3",
+        cover: "ganesh.png",
+        audio: "ganrajbihari.mp3",
         duration: "4:06"
     },
     {
@@ -48,11 +48,11 @@ const songs = [
     },
     {
         id: 5,
-        title: "Main aarti teri gau ",
-        artist: "Pandit ji ",
-        genre: "bhajan",
-        cover: "ganesh.png",
-        audio: "Main aarti teri gau ganesh.m4a",
+        title: "Naacho Naacho",
+        artist: "Rahul Sipligunj  ",
+        genre: "pop",
+        cover: "naatunaatupng",
+        audio: "naatunaatu.m4a",
         duration: "6:20"
     },
      {
@@ -64,15 +64,7 @@ const songs = [
         audio: "Vishnu stuti.mp3",
         duration: "3:30"
     },
-    {
-        id: 19,
-        title: "comming soon",
-        artist: "Neeraj Shridhar, Sunidhi Chauhan,",
-        genre: "pop",
-        cover: "vishu.png",
-        audio: "koina.mp3",
-        duration: "2:52"
-    },
+    
     {
         id: 7,
         title: "Vishnu Chalisa Fast",
