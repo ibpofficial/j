@@ -51,7 +51,7 @@ const songs = [
         title: "Naacho Naacho",
         artist: "Rahul Sipligunj  ",
         genre: "pop",
-        cover: "naatunaatupng",
+        cover: "naatunaatu.png",
         audio: "naatunaatu.m4a",
         duration: "6:20"
     },
