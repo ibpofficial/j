@@ -1546,3 +1546,24 @@ body {
 
 
 
+/* Add to style.css */
+.toggle-history-btn {
+    background-color: var(--bg-tertiary);
+    border: none;
+    color: var(--text-secondary);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.2s;
+}
+
+.toggle-history-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+
+
+
