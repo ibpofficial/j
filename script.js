@@ -3,11 +3,12 @@ const songs = [
      {
         id: 1,
         title: "MILLIONARE",
-        artist: "yo yo honey sing ",
+        artist: "yo yo honey sing",
         genre: "hiphop",
         cover: "millionare.png",
         audio: "MILLIONAIRE SONG (Full Video) YoYoHoneySingh GLORY BHUSHAN KUMAR - T-Series.mp3",
-        duration: "5:12"
+        duration: "5:12",
+        showOnHome: true // Add this to control visibility on home
     },
     
     {
@@ -30,11 +31,11 @@ const songs = [
     },
     {
         id: 3,
-        title: "Mera Ganraj Bihari ",
-        artist: "SHIV",
-        genre: "bhajan",
-        cover: "ganesh.png",
-        audio: "ganrajbihari.mp3",
+        title: "Naacho Naacho",
+        artist: "Vishal Mishra",
+        genre: "pop",
+        cover: "nattunattu.png",
+        audio: "naatunaatu.mp3",
         duration: "4:06"
     },
     {
@@ -48,11 +49,11 @@ const songs = [
     },
     {
         id: 5,
-        title: "Naacho Naacho",
-        artist: "Rahul Sipligunj  ",
-        genre: "pop",
-        cover: "naatunaatu.png",
-        audio: "naatunaatu.m4a",
+        title: "Main aarti teri gau ",
+        artist: "Pandit ji ",
+        genre: "bhajan",
+        cover: "ganesh.png",
+        audio: "Main aarti teri gau ganesh.m4a",
         duration: "6:20"
     },
      {
@@ -64,7 +65,15 @@ const songs = [
         audio: "Vishnu stuti.mp3",
         duration: "3:30"
     },
-    
+    {
+        id: 19,
+        title: "Ek khatola",
+        artist: "masoom sharma",
+        genre: "pop",
+        cover: "ekkhotala.png",
+        audio: "koina.mp3",
+        duration: "2:52"
+    },
     {
         id: 7,
         title: "Vishnu Chalisa Fast",
@@ -221,7 +230,7 @@ let currentSongToAddToPlaylist = null;
 
 // Initialize
 function init() {
-    renderSongsByGenre('trending', songs.slice(0, 6));
+    renderSongsByGenre('trending', songs.slice(0, 10));
     renderSongsByGenre('pop', songs.filter(song => song.genre === 'pop'));
     renderSongsByGenre('rock', songs.filter(song => song.genre === 'rock'));
     renderSongsByGenre('hiphop', songs.filter(song => song.genre === 'hiphop'));
@@ -310,19 +319,20 @@ function setupEventListeners() {
     });
 }
 
-// Render songs by genre
 function renderSongsByGenre(genre, songs) {
     const grid = document.getElementById(`${genre}-songs`);
     if (!grid) return;
     
     grid.innerHTML = '';
     
-    songs.forEach(song => {
+    // Filter songs that should appear on home
+    const songsToShow = songs.filter(song => song.showOnHome !== false);
+    
+    songsToShow.forEach(song => {
         const songCard = createSongCard(song);
         grid.appendChild(songCard);
     });
 }
-
 // Create song card element
 function createSongCard(song) {
     const songCard = document.createElement('div');
@@ -1544,6 +1554,172 @@ function setupRecentlyPlayedToggle() {
         }
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add these functions to script.js
+
+// Modified renderSongsByGenre function to handle show more
+function renderSongsByGenre(genre, songs) {
+    const grid = document.getElementById(`${genre}-songs`);
+    if (!grid) return;
+    
+    // Create or get the container for this section
+    let container = grid.parentElement;
+    if (!container.classList.contains('section-container')) {
+        const newContainer = document.createElement('div');
+        newContainer.className = 'section-container';
+        grid.parentNode.insertBefore(newContainer, grid);
+        newContainer.appendChild(grid);
+        container = newContainer;
+    }
+    
+    // Clear any existing show more button
+    const existingBtn = container.querySelector('.show-more-btn');
+    if (existingBtn) {
+        existingBtn.remove();
+    }
+    
+    // Clear the grid
+    grid.innerHTML = '';
+    
+    // Filter songs that should appear on home
+    const songsToShow = songs.filter(song => song.showOnHome !== false);
+    
+    // Determine how many to show initially
+    const initialCount = 5;
+    const shouldShowMore = songsToShow.length > initialCount;
+    const songsToRender = shouldShowMore ? songsToShow.slice(0, initialCount) : songsToShow;
+    
+    // Render the songs
+    songsToRender.forEach(song => {
+        const songCard = createSongCard(song);
+        grid.appendChild(songCard);
+    });
+    
+    // Add show more button if needed
+    if (shouldShowMore) {
+        const showMoreBtn = document.createElement('button');
+        showMoreBtn.className = 'show-more-btn';
+        showMoreBtn.textContent = 'Show More';
+        showMoreBtn.dataset.genre = genre;
+        showMoreBtn.dataset.expanded = 'false';
+        showMoreBtn.dataset.allSongs = JSON.stringify(songsToShow.map(song => song.id));
+        
+        showMoreBtn.addEventListener('click', function() {
+            const isExpanded = this.dataset.expanded === 'true';
+            
+            if (isExpanded) {
+                // Show only initial count
+                grid.innerHTML = '';
+                songsToShow.slice(0, initialCount).forEach(song => {
+                    const songCard = createSongCard(song);
+                    grid.appendChild(songCard);
+                });
+                this.textContent = 'Show More';
+                this.dataset.expanded = 'false';
+            } else {
+                // Show all songs
+                grid.innerHTML = '';
+                songsToShow.forEach(song => {
+                    const songCard = createSongCard(song);
+                    grid.appendChild(songCard);
+                });
+                this.textContent = 'Show Less';
+                this.dataset.expanded = 'true';
+            }
+        });
+        
+        container.appendChild(showMoreBtn);
+    }
+}
+
+// Update the init function to wrap section headers
+function init() {
+    // Wrap all section headers
+    document.querySelectorAll('.section h2').forEach(header => {
+        const container = document.createElement('div');
+        container.className = 'section-header';
+        header.parentNode.insertBefore(container, header);
+        container.appendChild(header);
+    });
+    
+    renderSongsByGenre('trending', songs.slice(0, 10));
+    renderSongsByGenre('pop', songs.filter(song => song.genre === 'pop'));
+    renderSongsByGenre('rock', songs.filter(song => song.genre === 'rock'));
+    renderSongsByGenre('hiphop', songs.filter(song => song.genre === 'hiphop'));
+    renderSongsByGenre('bhajan', songs.filter(song => song.genre === 'bhajan'));
+    renderRecentlyPlayed();
+    setupRecentlyPlayedToggle();
+
+    renderFavorites();
+    renderPlaylists();
+    
+    // Load first song
+    if (songs.length > 0) {
+        loadSong(songs[0]);
+    }
+    
+    // Event listeners
+    setupEventListeners();
+}
+
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', init);
 
