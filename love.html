@@ -807,10 +807,17 @@
     <div class="container">
         <div class="channel-art" id="channel-art">
             <div class="channel-art-content">
-                <h1 class="playlist-title">Playlist</h1>
-                <p class="playlist-description">HIPHOP</p>
+                <h1 class="playlist-title">My Playlist</h1>
+                <p class="playlist-description">Your favorite tracks all in one place</p>
                 <div class="stats">
-               
+                    <div class="stat-item">
+                        <i class="fas fa-music"></i>
+                        <span id="total-songs">8 songs</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="far fa-clock"></i>
+                        <span id="total-duration">26 min</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -902,19 +909,20 @@
 
     <audio id="audio-player"></audio>
 
-
     <script>
-        // Sample song data
+        // Enhanced song data with more details
         const songs = [
             {
                 id: 1,
                 title: "MILLIONARE",
-                artist: "Yo Yo Honey sing",
+                artist: "Yo Yo Honey Singh",
                 album: "GLORY",
                 dateAdded: "Jan 7, 2020",
                 duration: "3:20",
+                durationSec: 200,
                 cover: "millionare.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                liked: false
             },
             {
                 id: 2,
@@ -923,8 +931,10 @@
                 album: "Without Prejudice",
                 dateAdded: "Jan 7, 2020",
                 duration: "3:35",
+                durationSec: 215,
                 cover: "qatal.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+                liked: true
             },
             {
                 id: 3,
@@ -933,8 +943,10 @@
                 album: "Without Prejudice",
                 dateAdded: "Nov 25, 2016",
                 duration: "3:50",
+                durationSec: 230,
                 cover: "janeman.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+                liked: false
             },
             {
                 id: 4,
@@ -943,8 +955,10 @@
                 album: "Without Prejudice",
                 dateAdded: "Mar 27, 2020",
                 duration: "3:23",
+                durationSec: 203,
                 cover: "ages.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+                liked: false
             },
             {
                 id: 5,
@@ -953,28 +967,34 @@
                 album: "Future Nostalgia",
                 dateAdded: "Nov 1, 2019",
                 duration: "3:03",
+                durationSec: 183,
                 cover: "jattmakhma.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+                liked: true
             },
             {
                 id: 6,
                 title: "BONITA",
-                artist: "Yo Yo Honey song",
+                artist: "Yo Yo Honey Singh",
                 album: "GLORY",
                 dateAdded: "Nov 16, 2019",
                 duration: "2:54",
+                durationSec: 174,
                 cover: "bonita.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
+                liked: false
             },
             {
                 id: 7,
-                title: "KNOCK KNOCK ",
+                title: "KNOCK KNOCK",
                 artist: "KR$NA",
                 album: "_______",
                 dateAdded: "Aug 30, 2019",
                 duration: "3:35",
+                durationSec: 215,
                 cover: "krisna.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
+                liked: false
             },
             {
                 id: 8,
@@ -983,10 +1003,18 @@
                 album: "Spider-Man: Into the Spider-Verse",
                 dateAdded: "Oct 18, 2018",
                 duration: "2:38",
+                durationSec: 158,
                 cover: "https://upload.wikimedia.org/wikipedia/en/4/4b/Post_Malone_%26_Swae_Lee_-_Sunflower.png",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
-            }
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+                liked: true
+            },
+            
+        
         ];
+
+        // Calculate total duration
+        const totalDuration = songs.reduce((sum, song) => sum + song.durationSec, 0);
+        const totalMinutes = Math.floor(totalDuration / 60);
 
         // DOM elements
         const songsList = document.getElementById('songs-list');
@@ -1003,10 +1031,42 @@
         const volumeProgress = document.getElementById('volume-progress');
         const searchBar = document.querySelector('.search-bar');
         const searchSuggestions = document.querySelector('.search-suggestions');
+        const channelArt = document.getElementById('channel-art');
+        const totalSongsEl = document.getElementById('total-songs');
+        const totalDurationEl = document.getElementById('total-duration');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const shuffleBtn = document.getElementById('shuffle-btn');
+        const repeatBtn = document.getElementById('repeat-btn');
+        const muteBtn = document.getElementById('mute-btn');
+        const randomPlayBtn = document.getElementById('random-play-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const nowPlayingBar = document.getElementById('now-playing-bar');
 
-        // Current song index
+        // Player state
         let currentSongIndex = 0;
         let isPlaying = false;
+        let isShuffleOn = false;
+        let isRepeatOn = false;
+        let isMuted = false;
+        let lastVolume = 0.8;
+        let isScrubbing = false;
+        let isVolumeScrubbing = false;
+
+        // Initialize
+        function init() {
+            loadSongs();
+            updateStats();
+            audioPlayer.volume = lastVolume;
+            volumeProgress.style.width = `${lastVolume * 100}%`;
+            
+            // Show FAB after a delay
+            setTimeout(() => {
+                randomPlayBtn.classList.add('visible');
+            }, 1000);
+        }
 
         // Load songs into the table
         function loadSongs() {
@@ -1015,18 +1075,56 @@
                 const row = document.createElement('tr');
                 row.className = 'song-row';
                 row.innerHTML = `
-                    <td class="song-number">${index + 1}</td>
+                    <td class="song-number">
+                        <span class="number">${index + 1}</span>
+                        <i class="fas fa-play play-icon"></i>
+                    </td>
                     <td>
                         <div class="song-title">${song.title}</div>
                         <div class="song-artist">${song.artist}</div>
                     </td>
                     <td class="song-album">${song.album}</td>
                     <td class="song-date">${song.dateAdded}</td>
-                    <td class="song-duration">${song.duration}</td>
+                    <td class="song-duration">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <span>${song.duration}</span>
+                            <div class="song-actions">
+                                <i class="far fa-heart like-btn ${song.liked ? 'liked' : ''}" data-id="${song.id}"></i>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </td>
                 `;
-                row.addEventListener('click', () => playSong(index));
+                row.addEventListener('click', (e) => {
+                    // Don't play song if clicking on action buttons
+                    if (!e.target.classList.contains('fa-heart') && !e.target.classList.contains('fa-plus')) {
+                        playSong(index);
+                    }
+                });
                 songsList.appendChild(row);
             });
+
+            // Add event listeners to like buttons
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.getAttribute('data-id'));
+                    const song = songs.find(s => s.id === id);
+                    if (song) {
+                        song.liked = !song.liked;
+                        this.classList.toggle('liked');
+                        
+                        // Show toast notification
+                        showToast(song.liked ? 'Added to favorites' : 'Removed from favorites');
+                    }
+                });
+            });
+        }
+
+        // Update playlist stats
+        function updateStats() {
+            totalSongsEl.textContent = `${songs.length} songs`;
+            totalDurationEl.textContent = `${totalMinutes} min`;
         }
 
         // Play a song
@@ -1035,63 +1133,157 @@
                 currentSongIndex = index;
                 const song = songs[index];
                 
+                // Show loading state
+                nowPlayingCover.classList.remove('playing');
+                nowPlayingCover.style.opacity = '0.5';
+                
                 audioPlayer.src = song.audio;
-                audioPlayer.play();
-                isPlaying = true;
-                playPauseIcon.className = 'fas fa-pause';
-                
-                nowPlayingCover.src = song.cover;
-                nowPlayingCover.classList.add('playing');
-                nowPlayingTitle.textContent = song.title;
-                nowPlayingArtist.textContent = song.artist;
-                durationEl.textContent = song.duration;
-                
-                // Highlight the currently playing song
-                const rows = document.querySelectorAll('.song-row');
-                rows.forEach(row => row.style.color = 'var(--text-primary)');
-                rows[index].style.color = 'var(--primary-color)';
+                audioPlayer.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playPauseIcon.className = 'fas fa-pause';
+                        
+                        nowPlayingCover.src = song.cover || 'a.png';
+                        nowPlayingCover.style.opacity = '1';
+                        nowPlayingCover.classList.add('playing');
+                        nowPlayingTitle.textContent = song.title;
+                        nowPlayingArtist.textContent = song.artist;
+                        durationEl.textContent = song.duration;
+                        
+                        // Update channel art
+                        channelArt.style.backgroundImage = `url('${song.cover || 'a.png'}')`;
+                        
+                        // Highlight the currently playing song
+                        const rows = document.querySelectorAll('.song-row');
+                        rows.forEach(row => row.classList.remove('playing'));
+                        rows[index].classList.add('playing');
+                        
+                        // Scroll to the playing song if it's not visible
+                        rows[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    })
+                    .catch(error => {
+                        console.error('Error playing song:', error);
+                        showToast('Error playing song');
+                    });
             }
         }
 
         // Toggle play/pause
         function togglePlayPause() {
-            if (isPlaying) {
-                audioPlayer.pause();
-                playPauseIcon.className = 'fas fa-play';
-                nowPlayingCover.classList.remove('playing');
-            } else {
-                audioPlayer.play();
-                playPauseIcon.className = 'fas fa-pause';
-                nowPlayingCover.classList.add('playing');
+            if (audioPlayer.src) {
+                if (isPlaying) {
+                    audioPlayer.pause();
+                    playPauseIcon.className = 'fas fa-play';
+                    nowPlayingCover.classList.remove('playing');
+                } else {
+                    audioPlayer.play();
+                    playPauseIcon.className = 'fas fa-pause';
+                    nowPlayingCover.classList.add('playing');
+                }
+                isPlaying = !isPlaying;
+            } else if (songs.length > 0) {
+                // If no song is selected, play the first one
+                playSong(0);
             }
-            isPlaying = !isPlaying;
         }
 
         // Play next song
         function playNextSong() {
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
-            playSong(currentSongIndex);
+            let nextIndex;
+            if (isShuffleOn) {
+                nextIndex = getRandomSongIndex();
+            } else {
+                nextIndex = (currentSongIndex + 1) % songs.length;
+            }
+            playSong(nextIndex);
         }
 
         // Play previous song
         function playPrevSong() {
-            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-            playSong(currentSongIndex);
+            if (audioPlayer.currentTime > 3) {
+                // If more than 3 seconds into song, restart it
+                audioPlayer.currentTime = 0;
+            } else {
+                // Otherwise go to previous song
+                let prevIndex;
+                if (isShuffleOn) {
+                    prevIndex = getRandomSongIndex();
+                } else {
+                    prevIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                }
+                playSong(prevIndex);
+            }
+        }
+
+        // Get random song index (excluding current one)
+        function getRandomSongIndex() {
+            if (songs.length <= 1) return 0;
+            
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * songs.length);
+            } while (randomIndex === currentSongIndex);
+            
+            return randomIndex;
+        }
+
+        // Toggle shuffle
+        function toggleShuffle() {
+            isShuffleOn = !isShuffleOn;
+            shuffleBtn.style.color = isShuffleOn ? 'var(--primary-color)' : 'var(--text-primary)';
+            showToast(isShuffleOn ? 'Shuffle on' : 'Shuffle off');
+        }
+
+        // Toggle repeat
+        function toggleRepeat() {
+            isRepeatOn = !isRepeatOn;
+            repeatBtn.style.color = isRepeatOn ? 'var(--primary-color)' : 'var(--text-primary)';
+            showToast(isRepeatOn ? 'Repeat on' : 'Repeat off');
+        }
+
+        // Toggle mute
+        function toggleMute() {
+            if (isMuted) {
+                audioPlayer.volume = lastVolume;
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                volumeProgress.style.width = `${lastVolume * 100}%`;
+            } else {
+                lastVolume = audioPlayer.volume;
+                audioPlayer.volume = 0;
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                volumeProgress.style.width = '0%';
+            }
+            isMuted = !isMuted;
+        }
+
+        // Play random song
+        function playRandomSong() {
+            const randomIndex = Math.floor(Math.random() * songs.length);
+            playSong(randomIndex);
+            showToast('Playing random song');
         }
 
         // Update progress bar
         function updateProgress() {
-            const { currentTime, duration } = audioPlayer;
-            const progressPercent = (currentTime / duration) * 100;
-            progress.style.width = `${progressPercent}%`;
-            
-            // Update time display
-            currentTimeEl.textContent = formatTime(currentTime);
-            durationEl.textContent = formatTime(duration);
+            if (!isScrubbing) {
+                const { currentTime, duration } = audioPlayer;
+                const progressPercent = (currentTime / duration) * 100 || 0;
+                progress.style.width = `${progressPercent}%`;
+                
+                // Update time display
+                currentTimeEl.textContent = formatTime(currentTime);
+                
+                // Update duration if it's a valid number
+                if (!isNaN(duration)) {
+                    durationEl.textContent = formatTime(duration);
+                }
+            }
         }
 
         // Format time in mm:ss
         function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
@@ -1105,13 +1297,44 @@
             audioPlayer.currentTime = (clickX / width) * duration;
         }
 
+        // Start scrubbing
+        function startScrubbing() {
+            isScrubbing = true;
+        }
+
+        // End scrubbing
+        function endScrubbing() {
+            isScrubbing = false;
+        }
+
+        // Start volume scrubbing
+        function startVolumeScrubbing() {
+            isVolumeScrubbing = true;
+        }
+
+        // End volume scrubbing
+        function endVolumeScrubbing() {
+            isVolumeScrubbing = false;
+        }
+
         // Set volume when clicked on volume bar
         function setVolume(e) {
             const width = this.clientWidth;
             const clickX = e.offsetX;
-            const volume = clickX / width;
+            const volume = Math.min(Math.max(clickX / width, 0), 1);
             audioPlayer.volume = volume;
             volumeProgress.style.width = `${volume * 100}%`;
+            
+            // Update mute state if needed
+            if (volume > 0 && isMuted) {
+                isMuted = false;
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else if (volume === 0 && !isMuted) {
+                isMuted = true;
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+            
+            lastVolume = volume;
         }
 
         // Search functionality
@@ -1137,8 +1360,11 @@
             } else {
                 searchSuggestions.innerHTML = results.map(song => `
                     <div class="suggestion-item" data-id="${song.id}">
-                        <div>${song.title}</div>
-                        <div style="font-size:12px;color:var(--text-secondary)">${song.artist} • ${song.album}</div>
+                        <img src="${song.cover || 'a.png'}" alt="${song.title}">
+                        <div class="song-info">
+                            <div>${song.title}</div>
+                            <div>${song.artist} • ${song.album}</div>
+                        </div>
                     </div>
                 `).join('');
                 
@@ -1159,14 +1385,112 @@
             searchSuggestions.classList.add('show');
         }
 
+        // Show toast notification
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Handle keyboard shortcuts
+        function handleKeyDown(e) {
+            // Space bar to play/pause (when not focused on input elements)
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                togglePlayPause();
+            }
+            
+            // Right arrow for next song
+            if (e.code === 'ArrowRight') {
+                playNextSong();
+            }
+            
+            // Left arrow for previous song
+            if (e.code === 'ArrowLeft') {
+                playPrevSong();
+            }
+            
+            // M to mute/unmute
+            if (e.code === 'KeyM') {
+                toggleMute();
+            }
+            
+            // S to toggle shuffle
+            if (e.code === 'KeyS') {
+                toggleShuffle();
+            }
+            
+            // R to toggle repeat
+            if (e.code === 'KeyR') {
+                toggleRepeat();
+            }
+        }
+
         // Event listeners
-        document.querySelector('.play-pause').addEventListener('click', togglePlayPause);
-        document.querySelector('.fa-step-forward').addEventListener('click', playNextSong);
-        document.querySelector('.fa-step-backward').addEventListener('click', playPrevSong);
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        nextBtn.addEventListener('click', playNextSong);
+        prevBtn.addEventListener('click', playPrevSong);
+        shuffleBtn.addEventListener('click', toggleShuffle);
+        repeatBtn.addEventListener('click', toggleRepeat);
+        muteBtn.addEventListener('click', toggleMute);
+        randomPlayBtn.addEventListener('click', playRandomSong);
+        
         audioPlayer.addEventListener('timeupdate', updateProgress);
-        audioPlayer.addEventListener('ended', playNextSong);
+        audioPlayer.addEventListener('ended', () => {
+            if (isRepeatOn) {
+                audioPlayer.currentTime = 0;
+                audioPlayer.play();
+            } else {
+                playNextSong();
+            }
+        });
+        audioPlayer.addEventListener('play', () => {
+            isPlaying = true;
+            playPauseIcon.className = 'fas fa-pause';
+            nowPlayingCover.classList.add('playing');
+        });
+        audioPlayer.addEventListener('pause', () => {
+            isPlaying = false;
+            playPauseIcon.className = 'fas fa-play';
+            nowPlayingCover.classList.remove('playing');
+        });
+        
         progressBar.addEventListener('click', setProgress);
+        progressBar.addEventListener('mousedown', startScrubbing);
+        document.addEventListener('mouseup', endScrubbing);
+        document.addEventListener('mousemove', (e) => {
+            if (isScrubbing) {
+                const rect = progressBar.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const duration = audioPlayer.duration;
+                audioPlayer.currentTime = (clickX / width) * duration;
+            }
+        });
+        
         volumeBar.addEventListener('click', setVolume);
+        volumeBar.addEventListener('mousedown', startVolumeScrubbing);
+        document.addEventListener('mouseup', endVolumeScrubbing);
+        document.addEventListener('mousemove', (e) => {
+            if (isVolumeScrubbing) {
+                const rect = volumeBar.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const volume = Math.min(Math.max(clickX / width, 0), 1);
+                audioPlayer.volume = volume;
+                volumeProgress.style.width = `${volume * 100}%`;
+                lastVolume = volume;
+                
+                if (volume > 0 && isMuted) {
+                    isMuted = false;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }
+            }
+        });
+        
         searchBar.addEventListener('input', (e) => searchSongs(e.target.value));
         searchBar.addEventListener('focus', () => {
             if (searchBar.value.length > 0) {
@@ -1178,37 +1502,25 @@
                 searchSuggestions.classList.remove('show');
             }
         });
-
-
-        function playSong(index) {
-    if (index >= 0 && index < songs.length) {
-        currentSongIndex = index;
-        const song = songs[index];
         
-        audioPlayer.src = song.audio;
-        audioPlayer.play();
-        isPlaying = true;
-        playPauseIcon.className = 'fas fa-pause';
+        document.addEventListener('keydown', handleKeyDown);
         
-        nowPlayingCover.src = song.cover;
-        document.getElementById('channel-art').style.backgroundImage = `url('${song.cover}')`;
-        nowPlayingCover.classList.add('playing');
-        nowPlayingTitle.textContent = song.title;
-        nowPlayingArtist.textContent = song.artist;
-        durationEl.textContent = song.duration;
-        
-        // Highlight the currently playing song
-        const rows = document.querySelectorAll('.song-row');
-        rows.forEach(row => row.style.color = 'var(--text-primary)');
-        rows[index].style.color = 'var(--primary-color)';
-    }
-}
-
+        // Hide player bar when scrolling down, show when scrolling up
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                // Scrolling down
+                nowPlayingBar.classList.add('hidden');
+            } else {
+                // Scrolling up
+                nowPlayingBar.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+        });
 
         // Initialize
-        loadSongs();
-        audioPlayer.volume = 0.8;
-        volumeProgress.style.width = '80%';
+        init();
     </script>
 </body>
 </html>
