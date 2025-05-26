@@ -63,10 +63,32 @@
         </button>
     </div>
 </div>
-
+<div class="media-grid">
+  <div class="media-card" data-link="millionare.html">
+    <img src="millionare.png" alt="Top Hits">
+  </div>
+  <div class="media-card" data-link="alan-gogoll.html">
+    <img src="ages.png" alt="Alan Gogoll">
+  </div>
+  <div class="media-card" data-link="dope-labs.html">
+    <img src="bonita.png" alt="Dope Labs">
+  </div>
+  <div class="media-card" data-link="chill-hits.html">
+    <img src="shub.png" alt="Chill Hits">
+  </div>
+  <div class="media-card" data-link="latina.html">
+    <img src="janeman.png" alt="Latina to Latina">
+  </div>
+  <div class="media-card" data-link="small-doses.html">
+    <img src="housefull5.png" alt="Small Doses">
+  </div>
+</div>
 <!-- In index.html, around line 57 -->
 <h2>Recently Played <button id="toggle-recently-played" class="toggle-history-btn">Hide History</button></h2>
 <div class="song-grid" id="recently-played"></div>
+<!-- Add this in the home section of index.html -->
+
+
             <!-- Home Section -->
             <div class="section" id="home-section">
                 <h2>Trending Now</h2>
@@ -209,5 +231,16 @@
 
 
     <script src="script.js"></script>
+    <script>
+  document.querySelectorAll('.media-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const link = card.getAttribute('data-link');
+      if (link) {
+        window.location.href = link;
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
