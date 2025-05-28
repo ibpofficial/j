@@ -5,7 +5,7 @@ const songs = [
         title: "MILLIONARE",
         artist: "yo yo honey sing",
         genre: "hiphop",
-        cover: "millionare.png",
+        cover: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
         audio: "MILLIONAIRE SONG (Full Video) YoYoHoneySingh GLORY BHUSHAN KUMAR - T-Series.mp3",
         duration: "5:12",
         showOnHome: true // Add this to control visibility on home
@@ -16,7 +16,7 @@ const songs = [
         title: "BONITA",
         artist: "yo yo honey sing",
         genre: "hiphop",
-        cover: "bonita.png",
+        cover: "https://lyricloops.com/wp-content/uploads/2024/09/Bonita-Lyrics-Yo-Yo-Honey-Singh-600x338.jpg",
         audio: "bonita.mp3",
         duration: "4:31"
     },
@@ -25,7 +25,7 @@ const songs = [
         title: "QAYAMAT",
         artist: "Neeraj Shridhar & Shruti Dhasmana",
         genre: "pop",
-        cover: "housefull5.png",
+        cover: "https://i.ytimg.com/vi/s06y3qa3fEQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDmJlvpxudxK6GSTh5u2ruYniMLiA",
         audio: "housefull5.mp3",
         duration: "2:52"
     },
@@ -34,7 +34,7 @@ const songs = [
         title: "Naacho Naacho",
         artist: "Vishal Mishra",
         genre: "pop",
-        cover: "nattunattu.png",
+        cover: "https://www.lyricsgoal.com/wp-content/uploads/2021/11/naacho-naacho-rrr-vishal-mishra.jpg",
         audio: "naatunaatu.mp3",
         duration: "4:06"
     },
@@ -43,7 +43,7 @@ const songs = [
         title: "Baba bholenath ",
         artist: "tadkeshwar mahadev ",
         genre: "bhajan",
-        cover: "bababholenaath.png",
+        cover: "https://i.pinimg.com/474x/e4/a1/6b/e4a16bcabb6db000d3e80b8eb502cb85.jpg",
         audio: "Baba bholenath meri naiya ko ubaaro na.mp3",
         duration: "5:28"
     },
@@ -52,7 +52,7 @@ const songs = [
         title: "Main aarti teri gau ",
         artist: "Pandit ji ",
         genre: "bhajan",
-        cover: "ganesh.png",
+        cover: "https://cdn11.bigcommerce.com/s-x49po/images/stencil/1500x1500/products/54083/278476/1598169540955_Shree_Ganesh__42118.1687411714.jpg?c=2",
         audio: "Main aarti teri gau ganesh.m4a",
         duration: "6:20"
     },
@@ -61,7 +61,7 @@ const songs = [
         title: "Vishnu stuti",
         artist: "Maanu ,Annural Khalid ",
         genre: "bhajan",
-        cover: "vishnu.png",
+        cover: "https://t3.ftcdn.net/jpg/08/53/98/72/360_F_853987281_DRruJqfRbnNwjUNyp1xAhTzbLtABG3ph.jpg",
         audio: "Vishnu stuti.mp3",
         duration: "3:30"
     },
@@ -70,7 +70,7 @@ const songs = [
         title: "Ek khatola",
         artist: "masoom sharma",
         genre: "pop",
-        cover: "ekkhotala.png",
+        cover: "https://i.ytimg.com/vi/xl6RvlD_KIM/maxresdefault.jpg",
         audio: "koina.mp3",
         duration: "2:52"
     },
@@ -79,7 +79,7 @@ const songs = [
         title: "Vishnu Chalisa Fast",
         artist: "vishnu",
         genre: "pop",
-        cover: "vishnu.png",
+        cover: "https://t3.ftcdn.net/jpg/08/53/98/72/360_F_853987281_DRruJqfRbnNwjUNyp1xAhTzbLtABG3ph.jpg",
         audio: "Vishnu Chalisa Fast.mp3",
         duration: "4:29"
     },
@@ -88,7 +88,7 @@ const songs = [
         title: "Hanuman aarti ",
         artist: "Hanuman ji",
         genre: "bhajan",
-        cover: "bajrang.png",
+        cover: "https://i.pinimg.com/736x/d8/d6/52/d8d6524ac9c89e9dbd2b02b35a05a684.jpg",
         audio: "Bajrang Baan.mp3",
         duration: "4:31"
     },
@@ -97,7 +97,7 @@ const songs = [
         title: "MILLIONARE",
         artist: "yo yo honey sing ",
         genre: "hiphop",
-        cover: "millionare.png",
+        cover: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
         audio: "MILLIONAIRE SONG (Full Video) YoYoHoneySingh GLORY BHUSHAN KUMAR - T-Series.mp3",
         duration: "5:12"
     },
@@ -106,7 +106,7 @@ const songs = [
         title: "JATT MAKHMA",
         artist: "yo yo honey sing ",
         genre: "hiphop",
-        cover: "jattmakhma.png",
+        cover: "https://i.ytimg.com/vi/OCz1sADowRI/maxresdefault.jpg",
         audio: "MILLIONAIRE SONG (Full Video) YoYoHoneySingh GLORY BHUSHAN KUMAR - T-Series.mp3",
         duration: "5:12"
     },
@@ -115,7 +115,7 @@ const songs = [
         title: "Bajrang baan ",
         artist: "Rasraj Ji Maharaj",
         genre: "bhajan",
-        cover: "bajrang.png",
+        cover: "https://source.boomplaymusic.com/group10/M00/06/08/42e5de0bb8b64a76844418b9076adc97_464_464.jpg",
         audio: "Bajrang Baan.mp3",
         duration: "2:20"
     },
@@ -124,7 +124,7 @@ const songs = [
         title: "Knock Knock",
         artist: "KR$NA ",
         genre: "hiphop",
-        cover: "krisna.png",
+        cover: "https://i.ytimg.com/vi/02OPySK0jsA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAH31bznr9tzcN9HDJ1KxIGUFwKtg",
         audio: "MILLIONAIRE SONG (Full Video) YoYoHoneySingh GLORY BHUSHAN KUMAR - T-Series.mp3",
         duration: "5:12"
     },
@@ -133,34 +133,26 @@ const songs = [
         title: "Janeman",
         artist: "GURU RANDHAWA ",
         genre: "hiphop",
-        cover: "janeman.png",
+        cover: "https://i.ytimg.com/vi/Q0xFN10WJGc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDvU-Ztb-ZdHf5RmKjoMYpOYbm8XA",
         audio: "janeman.mp3",
         duration: "5:12"
     },
-      {
-        id: 16,
-        title: "Knock Knock",
-        artist: "KR$NA ",
-        genre: "hiphop",
-        cover: "krisna.png",
-        audio: "MILLIONAIRE SONG (Full Video) YoYoHoneySingh GLORY BHUSHAN KUMAR - T-Series.mp3",
-        duration: "5:12"
-    },
+      
     {
         id: 9,
         title: "Chor Baazari",
         artist: "Atif aslam",
         genre: "hiphop",
-        cover: "chorbazari.png",
+        cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBkoNBmgSEbEz8xMb8EfLmqLXGmCAwXkwPOg&s",
         audio: "Chor Bazari Phir Se Bhool Chuk Maaf Rajkummar, Wamiqa Pritam, Tanishk, Irshad, Neeraj, Sunidhi - Sony Music India.mp3",
         duration: "3:25"
     },
     {
         id: 10,
         title: "QATAL ",
-        artist: "ury randhawa",
+        artist: "Gury randhawa",
         genre: "hiphop",
-        cover: "qatal.png",
+        cover: "https://i.ytimg.com/vi/c-FKlE3_kHo/maxresdefault.jpg",
         audio: "Guru Randhawa - QATAL - (Official Video) - Guru Randhawa.mp3",
         duration: "2:54"
     },
@@ -169,16 +161,16 @@ const songs = [
         title: "Pall Pal'",
         artist: "Talvindar",
         genre: "rock",
-        cover: "palpal.png",
+        cover: "https://i.ytimg.com/vi/AbkEmIgJMcU/maxresdefault.jpg",
         audio: "Afusic - Pal Pal with Talwiinder (Official Visualiser) Prod. AliSoomroMusic - AFUSIC.mp3",
         duration: "3:24"
     },
     {
         id: 12,
-        title: "Hotel California",
-        artist: "Eagles",
-        genre: "rock",
-        cover: "jhol.png",
+        title: "Teri Yadein",
+        artist: "Yo Yo honey sing & Grinny",
+        genre: "hiphop",
+        cover: "https://timesofindia.indiatimes.com/photo/msid-121411308/121411308.jpg?resizemode=4",
         audio: "assets/songs/hotel-california.mp3",
         duration: "6:30"
     }
