@@ -1716,3 +1716,43 @@ function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Toggle player visibility
+const playerToggleBtn = document.getElementById('player-toggle-btn');
+const player = document.querySelector('.player');
+
+if (playerToggleBtn && player) {
+    playerToggleBtn.addEventListener('click', () => {
+        player.classList.toggle('hidden');
+        playerToggleBtn.innerHTML = player.classList.contains('hidden') ? 
+            '<i class="fas fa-music"></i>' : 
+            '<i class="fas fa-times"></i>';
+    });
+}
+
+
+
+
