@@ -1712,24 +1712,105 @@ function init() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Add this to your script.js file (in the init function or near the top)
+const artists = [
+    {
+        id: 1,
+        name: "Yo Yo Honey Singh",
+        genre: "Hip Hop",
+        image: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
+        page: "yoyo.html"
+    },
+    {
+        id: 2,
+        name: "Vishal Mishra",
+        genre: "Pop",
+        image: "https://www.lyricsgoal.com/wp-content/uploads/2021/11/naacho-naacho-rrr-vishal-mishra.jpg",
+        page: "vishal-mishra.html"
+    },
+    {
+        id: 3,
+        name: "Tadkeshwar Mahadev",
+        genre: "Bhajan",
+        image: "https://i.pinimg.com/474x/e4/a1/6b/e4a16bcabb6db000d3e80b8eb502cb85.jpg",
+        page: "tadkeshwar-mahadev.html"
+    },
+    {
+        id: 4,
+        name: "Pandit Ji",
+        genre: "Bhajan",
+        image: "https://cdn11.bigcommerce.com/s-x49po/images/stencil/1500x1500/products/54083/278476/1598169540955_Shree_Ganesh__42118.1687411714.jpg?c=2",
+        page: "pandit-ji.html"
+    },
+    {
+        id: 5,
+        name: "Masoom Sharma",
+        genre: "Pop",
+        image: "https://i.ytimg.com/vi/xl6RvlD_KIM/maxresdefault.jpg",
+        page: "masoom-sharma.html"
+    },
+    {
+        id: 6,
+        name: "Guru Randhawa",
+        genre: "Hip Hop",
+        image: "https://i.ytimg.com/vi/Q0xFN10WJGc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDvU-Ztb-ZdHf5RmKjoMYpOYbm8XA",
+        page: "guru-randhawa.html"
+    },
+    
+];
+
+// Add this function to render artists
+function renderArtists() {
+    const artistsScroll = document.getElementById('artists-scroll');
+    artistsScroll.innerHTML = '';
+    
+    artists.forEach(artist => {
+        const artistCard = document.createElement('div');
+        artistCard.className = 'artist-card';
+        artistCard.innerHTML = `
+            <img src="${artist.image}" alt="${artist.name}" class="artist-image">
+            <div class="artist-name">${artist.name}</div>
+            <div class="artist-genre">${artist.genre}</div>
+        `;
+        
+        artistCard.addEventListener('click', () => {
+            window.location.href = artist.page;
+        });
+        
+        artistsScroll.appendChild(artistCard);
+    });
+}
+
+// Call renderArtists() in your init function
+init = (function (originalInit) {
+    return function () {
+        originalInit();
+        setGreeting();
+        renderArtists(); // Add this line
+    };
+})(init);
+
+
+
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', init);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1752,7 +1833,6 @@ if (playerToggleBtn && player) {
             '<i class="fas fa-times"></i>';
     });
 }
-
 
 
 
