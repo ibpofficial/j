@@ -1735,7 +1735,7 @@ const artists = [
         name: "Yo Yo Honey Singh",
         genre: "Hip Hop",
         image: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
-        page: "yoyo.html"
+        page: "https://ibpofficial.github.io/playlist/yoyo.html"
     },
     {
         id: 2,
