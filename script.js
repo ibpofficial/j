@@ -1381,56 +1381,57 @@ function init3DViewer() {
 
 
 
-
-window.addEventListener('load', () => {
-    const toast = document.getElementById('welcome-toast');
-    if (toast) {
-        toast.style.display = 'block';
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 4000);
-    }
-});
-
-
+// Add this to your script.js
 function setGreeting() {
     const greetingEl = document.getElementById("greeting-message");
     const hour = new Date().getHours();
-    let greeting = "Welcome";
-
-    if (hour < 12) greeting = "Good Morning ☀️";
-    else if (hour < 18) greeting = "Good Afternoon 🌤️";
-    else greeting = "Good Evening 🌙";
-
-    greetingEl.textContent = `${greeting}, enjoy your music!`;
-}
-
-function playAll() {
-    if (songs.length > 0) {
-        currentSongIndex = 0;
-        loadSong(songs[0]);
-        playSong();
+    let greeting = "";
+    let emoji = "";
+    
+    if (hour < 5) {
+        greeting = "Late Night Vibes";
+        emoji = "🌙";
+    } else if (hour < 12) {
+        greeting = "Good Morning";
+        emoji = "☀️";
+    } else if (hour < 17) {
+        greeting = "Good Afternoon";
+        emoji = "🌤️";
+    } else if (hour < 21) {
+        greeting = "Good Evening";
+        emoji = "🌆";
+    } else {
+        greeting = "Good Night";
+        emoji = "🌃";
+    }
+    
+    greetingEl.textContent = `${greeting} ${emoji}`;
+    
+    // Add time-based background color adjustment
+    const container = document.querySelector('.greeting-container');
+    if (container) {
+        if (hour < 5 || hour >= 21) {
+            // Night time
+            container.style.background = 'linear-gradient(135deg, rgba(10, 25, 47, 0.3), rgba(25, 20, 20, 0.4))';
+        } else if (hour < 12) {
+            // Morning
+            container.style.background = 'linear-gradient(135deg, rgba(255, 204, 128, 0.15), rgba(25, 20, 20, 0.3))';
+        } else if (hour < 17) {
+            // Afternoon
+            container.style.background = 'linear-gradient(135deg, rgba(128, 216, 255, 0.15), rgba(25, 20, 20, 0.3))';
+        } else {
+            // Evening
+            container.style.background = 'linear-gradient(135deg, rgba(255, 128, 128, 0.15), rgba(25, 20, 20, 0.3))';
+        }
     }
 }
 
-// Call it in init()
-init = (function (originalInit) {
-    return function () {
-        originalInit();
-        setGreeting();
-    };
-})(init);
-
-function renderDiscoveryCarousel() {
-    const carousel = document.getElementById('discover-carousel');
-    songs.slice(0, 10).forEach(song => {
-        const card = createSongCard(song);
-        carousel.appendChild(card);
-    });
+// Call this in your init function
+function init() {
+    // ... existing code ...
+    setGreeting();
+    // ... rest of your init code ...
 }
-window.addEventListener('load', renderDiscoveryCarousel);
-
-
 
 
 
