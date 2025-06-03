@@ -1735,7 +1735,7 @@ const artists = [
         name: "Yo Yo Honey Singh",
         genre: "Hip Hop",
         image: "https://i1.sndcdn.com/artworks-I1VkGxl2ilhQzbZY-9VobTQ-t500x500.jpg",
-        page: "https://ibpofficial.github.io/playlist/yoyo.html"
+        page: "yoyo.html"
     },
     {
         id: 2,
@@ -1836,3 +1836,73 @@ if (playerToggleBtn && player) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Modify the navigateToSection function to hide/show appropriate sections
+function navigateToSection(section) {
+    // Hide all sections
+    sections.forEach(sec => {
+        sec.style.display = 'none';
+    });
+    currentPlaylistSection.style.display = 'none';
+    
+    // Hide media grid and recently played when in favorites or playlists
+    const greetingSection = document.getElementById('greeting-section');
+    const mediaGrid = document.querySelector('.media-grid');
+    const recentlyPlayed = document.getElementById('recently-played');
+    
+    if (section === 'home') {
+        document.getElementById('home-section').style.display = 'block';
+        if (greetingSection) greetingSection.style.display = 'block';
+        if (mediaGrid) mediaGrid.style.display = 'grid';
+        if (recentlyPlayed) recentlyPlayed.style.display = 'grid';
+    } else if (section === 'search') {
+        document.getElementById('search-section').style.display = 'block';
+        searchInput.focus();
+        if (greetingSection) greetingSection.style.display = 'none';
+        if (mediaGrid) mediaGrid.style.display = 'none';
+        if (recentlyPlayed) recentlyPlayed.style.display = 'none';
+    } else if (section === 'favorites') {
+        document.getElementById('favorites-section').style.display = 'block';
+        if (greetingSection) greetingSection.style.display = 'none';
+        if (mediaGrid) mediaGrid.style.display = 'none';
+        if (recentlyPlayed) recentlyPlayed.style.display = 'none';
+    } else if (section === 'playlists') {
+        document.getElementById('playlists-section').style.display = 'block';
+        if (greetingSection) greetingSection.style.display = 'none';
+        if (mediaGrid) mediaGrid.style.display = 'none';
+        if (recentlyPlayed) recentlyPlayed.style.display = 'none';
+    }
+    
+    // Update menu active state
+    menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.section === section) {
+            item.classList.add('active');
+        }
+    });
+}
