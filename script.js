@@ -1740,10 +1740,10 @@ const artists = [
     },
     {
         id: 2,
-        name: "Vishal Mishra",
+        name: "Talvindar ",
         genre: "Pop",
-        image: "https://www.lyricsgoal.com/wp-content/uploads/2021/11/naacho-naacho-rrr-vishal-mishra.jpg",
-        page: "vishal-mishra.html"
+        image: "https://i1.sndcdn.com/avatars-VE0yGzvmwTQtGM7f-u1yzrw-t240x240.jpg",
+        page: "talvindar.html"
     },
     {
         id: 3,
