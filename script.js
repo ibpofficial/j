@@ -1742,7 +1742,7 @@ const artists = [
         id: 2,
         name: "Talvindar ",
         genre: "Pop",
-        image: "https://i1.sndcdn.com/avatars-VE0yGzvmwTQtGM7f-u1yzrw-t240x240.jpg",
+        image: "https://i.scdn.co/image/ab6761610000e5eb1b41d98a6831d076c45e1d88g",
         page: "talvindar.html"
     },
     {
@@ -1761,9 +1761,9 @@ const artists = [
     },
     {
         id: 5,
-        name: "Masoom Sharma",
+        name: "karan ",
         genre: "Pop",
-        image: "https://i.ytimg.com/vi/xl6RvlD_KIM/maxresdefault.jpg",
+        image: "https://c.ndtvimg.com/2025-08/dep6vtmg_karan-aujla_625x300_25_August_25.jpg?im=FeatureCrop,algorithm=dnn,width=545,height=307",
         page: "masoom-sharma.html"
     },
     {
@@ -1907,3 +1907,4 @@ function navigateToSection(section) {
         }
     });
 }
+
