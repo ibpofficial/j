@@ -1763,8 +1763,8 @@ const artists = [
         id: 5,
         name: "karan ",
         genre: "Pop",
-        image: "https://c.ndtvimg.com/2025-08/dep6vtmg_karan-aujla_625x300_25_August_25.jpg?im=FeatureCrop,algorithm=dnn,width=545,height=307",
-        page: "masoom-sharma.html"
+        image: "https://i.pinimg.com/736x/bf/57/ec/bf57ec4ce28ce03c07ca647f2bd4113a.jpg",
+        page: "karan.html"
     },
     {
         id: 6,
@@ -1907,4 +1907,5 @@ function navigateToSection(section) {
         }
     });
 }
+
 
