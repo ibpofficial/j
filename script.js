@@ -1742,7 +1742,7 @@ const artists = [
         id: 2,
         name: "Talvindar ",
         genre: "Pop",
-        image: "https://i.scdn.co/image/ab6761610000e5eb1b41d98a6831d076c45e1d88g",
+        image: "https://i.pinimg.com/736x/76/86/f7/7686f74439686fa21bcfa85915db7eac.jpg",
         page: "talvindar.html"
     },
     {
@@ -1907,5 +1907,6 @@ function navigateToSection(section) {
         }
     });
 }
+
 
 
